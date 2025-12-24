@@ -1,1 +1,39 @@
 
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function (s, t) {
+    if (s == null || t == null) return false;
+    if (s.length !== t.length) {
+        return false;
+    }
+    let map = new Map();
+
+    for (let i = 0; i < s.length; i++) {
+        map.set(s[i], (map.get(s[i]) || 0) + 1);
+        map.set(t[i], (map.get(t[i]) || 0) - 1);
+    }
+
+    for (let [key, value] of map) {
+        if (value !== 0) return false;
+    }
+
+    return true;
+
+};
+
+/*
+1. Create an empty map (key = character, value = frequency)
+2. Iterate over both strings at the same time
+3. If a character does not exist in the map yet, treat its value as 0
+4. For each character in s:
+   - increment its frequency by 1
+5. For each character in t:
+   - decrement its frequency by 1
+6. If t is an anagram of s, the frequency of each character will cancel out
+7. After the loop, all values in the map should be 0
+8. Iterate over the map entries:
+   - if any value is not 0, then t is NOT an anagram of s
+*/
