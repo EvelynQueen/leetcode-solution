@@ -1,1 +1,19 @@
+var twoSum = function (nums, target) {
+    let numMap = new Map();
+    for(let i = 0; i <= nums.length - 1; i++){
+        let differ = target - nums[i]
+        if(numMap.has(differ)){
+            return [numMap.get(differ), i];
+        }
+        numMap.set(nums[i], i)
+    }
+};
 
+/*
+Using HashMap
+Having an array of numbers [1,2,3,4,5,6]
+Target = 5 => 2 + 3 = 5 => 2 = 5 - 3
+There is a number in nums array is the different between target and another number
+interate over the nums array, if an number in array is = target - num => return that number & subtraction number
+ìf not , push subtraction number into hashmap
+*/
