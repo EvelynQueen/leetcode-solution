@@ -1,1 +1,33 @@
+var groupAnagrams = function (strs) {
+    let map = new Map();
 
+    for (let s of strs) {
+        let key = s.split('').sort().join('');
+        if (!map.has(key)) {
+            map.set(key, []);
+        }
+        map.get(key).push(s);
+    }
+
+    return Array.from(map.values());
+};
+
+/*
+Using HashMap
+
+Two strings are anagrams if their sorted characters are identical:
+"tca".split('').sort().join('') === "cat".split('').sort().join('') // true
+
+Approach:
+1. Initialize a Map where:
+   - key   = sorted version of a word
+   - value = array of words that are anagrams
+
+2. For each word in the input array:
+   - Sort the characters to generate the key
+   - If the key does not exist in the map:
+       → create a new entry with an empty array
+   - Add the current word to the array for that key
+
+3. Convert (flatten) all map values into an array and return it
+*/
