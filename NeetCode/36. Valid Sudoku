@@ -1,0 +1,29 @@
+
+
+var isValidSudoku = function (board) {
+  let row = Array.from({ length: 9 }, () => new Set());
+  let column = Array.from({ length: 9 }, () => new Set());
+  let box = Array.from({ length: 9 }, () => new Set());
+
+  const getBoxIndex = (i, j) => Math.floor(i / 3) * 3 + Math.floor(j / 3);
+
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      const val = board[i][j];
+      if (val === ".") continue;
+
+      const boxIndex = getBoxIndex(i, j);
+
+      if (row[i].has(val) || column[j].has(val) || box[boxIndex].has(val)) {
+        return false;
+      }
+
+      row[i].add(val);
+      column[j].add(val);
+      box[boxIndex].add(val);
+    }
+  }
+
+  return true;
+};
+
