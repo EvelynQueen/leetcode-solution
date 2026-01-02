@@ -2,8 +2,42 @@
  * @param {string} s
  * @return {boolean}
  */
+
+//Regex + reverse method
 var isPalindrome = function (s) {
     s = s.toLowerCase().replace(/[^a-z0-9]/g, "");
     let reversed = s.split("").reverse().join("");
     return s === reversed;
+};
+
+//Two pointer methods
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isPalindrome = function (s) {
+  let left = 0;
+  let right = s.length - 1;
+
+  const isAlphaNumeric = (ch) => {
+    return /^[a-z0-9]$/i.test(ch);
+  };
+
+  while (left < right) {
+    while (left < right && !isAlphaNumeric(s[left])) {
+      left++;
+    }
+    while (left < right && !isAlphaNumeric(s[right])) {
+      right--;
+    }
+
+    if (s[left].toLowerCase() !== s[right].toLowerCase()) {
+      return false;
+    }
+
+    left++;
+    right--;
+  }
+
+  return true;
 };
