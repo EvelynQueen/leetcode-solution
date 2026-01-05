@@ -1,6 +1,6 @@
 
-//1. Using sort() methods for t and s, then compare each letter of s and t
-// The only letter in t that different from s is the added letter
+//1. Using sort() methods for t and s, then compare each character in s and t
+// The only character in t that's different from s is the added character
 
 var findTheDifference = function (s, t) {
   t = t.split("").sort();
@@ -11,3 +11,57 @@ var findTheDifference = function (s, t) {
     }
   }
 };
+
+//2. Using HashMap to count frequency of each character in s and t
+
+//Using 2 maps;
+// Compare the frequency of each character of s and t
+// The character in t that has a different frequency from the corresponding character in s is the extra character
+// Or the character that's appeare in t but not appear in s is also the extra character 
+
+var findTheDifference = function (s, t) {
+  let map1 = new Map();
+  let map2 = new Map();
+
+  for (let i = 0; i <= s.length - 1; i++) {
+    map1.set(s[i], (map1.get(s[i]) || 0) + 1);
+  }
+
+  for (let i = 0; i <= t.length - 1; i++) {
+    map2.set(t[i], (map2.get(t[i]) || 0) + 1);
+  }
+
+  for (let [key, value] of map2) {
+    if ((map1.get(key) || 0) !== value) {
+      return key;
+    }
+  }
+};
+
+
+// Using 1 map;
+// All characters in s and t are keys, the initial value of each key is 0
+// If a character in s is found, increase the value of that key by 1
+// If a character in t is found, decrease the value of that key by 1
+// because every character in s also appears in t, the values of those keys become 0
+// there is exactly 1 extra character in t that does not appear in s, so the value of that key becomes -1
+// Iterate over [key, value] in the map, if any value is not equal to 0,
+// the character corresponding to that key is the added character !!!
+
+var findTheDifference = function (s, t) {
+  let map = new Map();
+
+  for (let i = 0; i <= t.length - 1; i++) {
+    if (s[i] !== undefined) {
+      map.set(s[i], (map.get(s[i]) || 0) + 1);
+    }
+    map.set(t[i], (map.get(t[i]) || 0) + 1);
+  }
+
+  for (let [key, value] of map) {
+    if (value !== 0) {
+      return key;
+    }
+  }
+};
+
