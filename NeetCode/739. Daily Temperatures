@@ -1,0 +1,29 @@
+var dailyTemperatures = function (temperatures) {
+  let stack = [];
+  let ans = Array(temperatures.length).fill(0);
+
+  for (let i = 0; i < temperatures.length; i++) {
+    while (
+      stack.length > 0 &&
+      temperatures[i] > temperatures[stack[stack.length - 1]]
+    ) {
+      let index = stack.pop();
+      ans[index] = i - index;
+    }
+    stack.push(i);
+  }
+
+  return ans;
+};
+
+/*
+1. Using stack to keep track the index of every temp each day
+2. Using an answer array with n element filled with 0 ;
+3. Keep the temp in a decrease until find a temp that higher than the top element in stack
+4. Then use a nother loop to check if current temp is higher than what element in stack
+5. Interate as long as stack is > 0 and current temp > top element in stack
+*/
+
+/* 
+Using nested loop to compare every value (brute force)
+*/
