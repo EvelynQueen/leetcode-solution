@@ -1,1 +1,13 @@
 
+//1. Using sort() methods for t and s, then compare each letter of s and t
+// The only letter in t that different from s is the added letter
+
+var findTheDifference = function (s, t) {
+  t = t.split("").sort();
+  s = s.split("").sort();
+  for (let i = 0; i <= t.length - 1; i++) {
+    if (t[i] !== s[i]) {
+      return t[i];
+    }
+  }
+};
