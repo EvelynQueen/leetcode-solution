@@ -1,7 +1,9 @@
-/**
- * @param {string} s
- * @return {number}
- */
+//Using stack
+// Continuosly check if top of a stack if A/C and the next element is either B/D
+// If true, pop(A) / pop(D) out of stack
+// If false, push into stack and continously checking
+// Continue checking the next element with the element behind the top element that was removed
+
 var minLength = function (s) {
     let stack = [];
 
