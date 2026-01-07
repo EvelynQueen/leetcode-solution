@@ -19,3 +19,17 @@ var minLength = function (s) {
 
     return stack.length;
 };
+
+
+// Using replaces()
+// Repeat replace "AB" and "CD" in string with ""
+// Until no more AB and CD in string is founded 
+
+var minLength = function (s) {
+
+    while (s.includes("AB") || s.includes("CD")) {
+        s = s.replace('AB', '')
+        s = s.replace('CD', '')
+    }
+    return s.length;
+};
