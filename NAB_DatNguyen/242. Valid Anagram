@@ -1,0 +1,11 @@
+// Using built in sort() function
+// Then compare 2 given strings
+
+var isAnagram = function(s, t) {
+
+    s = s.split('').sort().join('')
+    t = t.split('').sort().join('')
+
+    return s === t;
+    
+};
