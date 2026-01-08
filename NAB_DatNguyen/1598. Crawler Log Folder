@@ -1,0 +1,22 @@
+// Using stack
+// When a child folder appears => push it into stack
+// When see "../" => back to the nearest parent folder => pop() 
+// When see "./" => stay at curr folder => do nothing
+// Finally, number of folder  in stack is 
+// the minimum number of operations needed to go back to the main folder after the change folder operations.
+
+var minOperations = function (logs) {
+  let stack = [];
+
+  for (let s of logs) {
+    if (s == "../") {
+      stack.pop();
+      continue;
+    } else if (s === "./") {
+      continue;
+    }
+    stack.push(s);
+  }
+
+  return stack.length;
+};
