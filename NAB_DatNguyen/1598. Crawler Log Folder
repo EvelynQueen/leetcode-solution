@@ -20,3 +20,23 @@ var minOperations = function (logs) {
 
   return stack.length;
 };
+
+
+// Using count variable
+// Same logic with add or remove folder
+// Using only extra count variable too keep track
+
+var minOperations = function (logs) {
+  let count = 0;
+  for (let s of logs) {
+    if (s == "../") {
+      if (count !== 0) count--;
+      continue;
+    } else if (s === "./") {
+      continue;
+    }
+    count++;
+  }
+
+  return count;
+};
