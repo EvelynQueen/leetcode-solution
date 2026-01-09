@@ -1,0 +1,30 @@
+// Using monotic stack + hash map
+// monotonic decreasing stack is a stack data structure
+// where elements are always kept in non-increasing order from bottom to top
+// nums1 is subArray of nums2 => build monotonic decreasing stack base on nums2
+// Walk through nums2
+// Keep a stack of numbers waiting to find a bigger number.
+// When seeing a bigger number, it becomes the next greater for the ones was poped.
+// Save those matches in a map
+// For nums1, just read the answers from the map (or -1 if none).
+
+var nextGreaterElement = function (nums1, nums2) {
+  let stack = [];
+  let map = new Map();
+  let res = new Array(nums1.length).fill(-1);
+
+  for (let n of nums2) {
+    while (stack.length > 0 && stack[stack.length - 1] < n) {
+      map.set(stack.pop(), n);
+    }
+    stack.push(n);
+  }
+
+  for (let i = 0; i <= nums1.length - 1; i++) {
+    if (map.has(nums1[i])) {
+      res[i] = map.get(nums1[i]);
+    }
+  }
+
+  return res;
+};
