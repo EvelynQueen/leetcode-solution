@@ -1,0 +1,53 @@
+// Car Fleet – Key Notes
+// Arrival time of a car (if driving alone):
+// time = (target - position) / speed
+
+// Cars move in one lane → no overtaking allowed
+// A car can only interact with the nearest car in front of it
+
+// Even if a car behind is faster and could reach the target earlier,
+// it must first catch the nearest car ahead
+// Once it catches that car, it slows down and matches that car’s speed
+// From that moment, they form a single fleet and share the same arrival time
+
+// Cars further ahead do NOT matter until the nearest car is caught
+
+// To count fleets:
+// 1. Sort cars by position in descending order (closest to target first)
+// 2. Track arrival times
+// 3. If a car’s arrival time is greater than the fleet ahead → new fleet
+// 4. If a car’s arrival time is less than or equal → joins the fleet ahead
+
+// Core idea:
+// A slower car in front acts as a barrier and absorbs faster cars behind it
+
+
+/**
+ * @param {number} target
+ * @param {number[]} position
+ * @param {number[]} speed
+ * @return {number}
+ */
+var carFleet = function (target, position, speed) {
+  let cars = [];
+  for (let i = 0; i < position.length; i++) {
+    cars.push([position[i], (target - position[i]) / speed[i]]);
+  }
+
+  cars.sort((a, b) => b[0] - a[0]);
+
+  let fleets = 0;
+  let maxTime = 0;
+
+  for (let i = 0; i < cars.length; i++) {
+    let time = cars[i][1];
+
+    if (time > maxTime) {
+      fleets++;
+      maxTime = time;
+    }
+  }
+
+  return fleets;
+};
+v
