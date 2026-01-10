@@ -1,0 +1,34 @@
+// Search for row that may contain the target 
+// Binary search on the row that contain the target
+
+var searchMatrix = function (matrix, target) {
+  let rows = matrix.length;
+  let cols = matrix[0].length;
+
+  let tarRow = -1;
+  for (let i = 0; i < rows; i++) {
+    if (matrix[i][0] <= target) {
+      tarRow = i;
+    } else {
+      break;
+    }
+  }
+
+  if (tarRow === -1) return false;
+
+  let left = 0;
+  let right = cols - 1;
+
+  while (left <= right) {
+    let mid = Math.floor(left + (right - left) / 2);
+    if (matrix[tarRow][mid] === target) {
+      return true;
+    } else if (matrix[tarRow][mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return false;
+};
