@@ -1,0 +1,25 @@
+var minEatingSpeed = function (piles, h) {
+  let left = 1;
+  let right = Math.max(...piles);
+
+  let countHour = (arr, k) => {
+    let sum = 0;
+    for (let a of arr) {
+      sum += Math.ceil(a / k);
+    }
+    return sum;
+  };
+
+  while (left < right) {
+    let mid = Math.floor(left + (right - left) / 2);
+    let hour = countHour(piles, mid);
+
+    if (hour > h) {
+      left = mid + 1;
+    } else {
+      right = mid;
+    }
+  }
+
+  return left;
+};
