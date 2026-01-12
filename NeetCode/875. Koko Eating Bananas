@@ -1,3 +1,11 @@
+/*
+Because the feasibility of speed k is monotonic,
+we binary search k from 1 to max(piles).
+If speed k works, try smaller speeds.
+If it fails, try larger speeds.
+Return the smallest k that works.
+*/
+
 var minEatingSpeed = function (piles, h) {
   let left = 1;
   let right = Math.max(...piles);
