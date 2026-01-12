@@ -1,0 +1,28 @@
+//Rotated divided an array into 2 part
+// part 1 : small part contain min
+// part 2 : large part contain max
+// If nums[mid] > nums[right] => mid element in part 2 and right element in part 1
+// contine to find min from mid + 1 -> right
+// Otherwise nums[mid] < nums[right]  => mid element in part 1 and right element in part 2
+//nums[mid] may be the min element
+//so continue to find min from left -> mid
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findMin = function (nums) {
+  let left = 0;
+  let right = nums.length - 1;
+
+  while (left < right) {
+    let mid = Math.floor(left + (right - left) / 2);
+
+    if (nums[mid] > nums[right]) {
+      left = mid + 1;
+    } else {
+      right = mid;
+    }
+  }
+
+  return nums[left];
+};
