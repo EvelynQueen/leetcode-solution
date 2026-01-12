@@ -1,6 +1,10 @@
 /**
- * @param {number[]} prices
- * @return {number}
+so keep two variables one keeps track of profit and second keeps track of minimum(minCost) value of stock
+initialize profit with zero and minCost to first price
+then iterate through the array
+we have to check what profit we can get if we sell the stock at that index and is it greater than our previous profits
+then we need to also check if current price of stock is less than the minCost we have been keeping track of
+return profit after iterating overprice array
  */
 var maxProfit = function (prices) {
   let buy = prices[0];
