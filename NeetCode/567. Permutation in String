@@ -1,0 +1,43 @@
+var checkInclusion = function (s1, s2) {
+  if (s1.length > s2.length) return false;
+
+  let count1 = {};
+  let count2 = {};
+
+  for (let ch of s1) {
+    count1[ch] = (count1[ch] || 0) + 1;
+  }
+
+  let left = 0;
+
+  for (let right = 0; right < s2.length; right++) {
+    let r = s2[right];
+    count2[r] = (count2[r] || 0) + 1;
+
+    if (right - left + 1 > s1.length) {
+      let l = s2[left];
+      count2[l]--;
+      if (count2[l] === 0) delete count2[l];
+      left++;
+    }
+
+    if (right - left + 1 === s1.length) {
+      if (isEqual(count1, count2)) return true;
+    }
+  }
+
+  return false;
+};
+
+function isEqual(a, b) {
+  let keysA = Object.keys(a);
+  let keysB = Object.keys(b);
+
+  if (keysA.length !== keysB.length) return false;
+
+  for (let key of keysA) {
+    if (a[key] !== b[key]) return false;
+  }
+
+  return true;
+}
