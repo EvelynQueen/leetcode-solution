@@ -20,20 +20,20 @@ var findTheDifference = function (s, t) {
 // Or the character that's appeare in t but not appear in s is also the extra character 
 
 var findTheDifference = function (s, t) {
-  let map1 = new Map();
-  let map2 = new Map();
+  let sourceCharCount = new Map();
+  let targetCharCount = new Map();
 
-  for (let i = 0; i <= s.length - 1; i++) {
-    map1.set(s[i], (map1.get(s[i]) || 0) + 1);
+  for (let index = 0; index < s.length; index++) {
+    sourceCharCount.set(s[index], (sourceCharCount.get(s[index]) || 0) + 1);
   }
 
-  for (let i = 0; i <= t.length - 1; i++) {
-    map2.set(t[i], (map2.get(t[i]) || 0) + 1);
+  for (let index = 0; index < t.length; index++) {
+    targetCharCount.set(t[index], (targetCharCount.get(t[index]) || 0) + 1);
   }
 
-  for (let [key, value] of map2) {
-    if ((map1.get(key) || 0) !== value) {
-      return key;
+  for (let [char, count] of targetCharCount) {
+    if ((sourceCharCount.get(char) || 0) !== count) {
+      return char;
     }
   }
 };
@@ -49,19 +49,55 @@ var findTheDifference = function (s, t) {
 // the character corresponding to that key is the added character !!!
 
 var findTheDifference = function (s, t) {
-  let map = new Map();
+  let charCount = new Map();
 
-  for (let i = 0; i <= t.length - 1; i++) {
-    if (s[i] !== undefined) {
-      map.set(s[i], (map.get(s[i]) || 0) + 1);
+  for (let index = 0; index < t.length; index++) {
+    if (s[index] !== undefined) {
+      charCount.set(s[index], (charCount.get(s[index]) || 0) - 1);
     }
-    map.set(t[i], (map.get(t[i]) || 0) + 1);
+
+    charCount.set(t[index], (charCount.get(t[index]) || 0) + 1);
   }
 
-  for (let [key, value] of map) {
-    if (value !== 0) {
-      return key;
+  for (let [char, count] of charCount) {
+    if (count !== 0) {
+      return char;
     }
   }
+};
+
+
+
+// 3. Using sum variable + ASCII charCode
+// Using the numeric ASCII value of each character
+// t contains every character in s with an extra char
+// If we subtract the ASCII values of s
+// Then add the ASCII values of t
+//All matching characters cancel out
+//The remaining value corresponds to the extra character
+
+var findTheDifference = function (s, t) {
+  let sum = 0;
+
+  for (let c of s) sum -= c.charCodeAt(0);
+  for (let c of t) sum += c.charCodeAt(0);
+
+  return String.fromCharCode(sum);
+};
+
+
+//4 . Using XOR operation
+// Rules : a^a = 0 and 0 ^b = b
+// t contains every character in s with an extra char
+// => that means every char in s xor with t = 0 
+// => then we have 0 ^ extra char in t = extra char in t
+
+var findTheDifference = function(s, t) {
+  let xor = 0;
+
+  for (const c of s) xor ^= c.charCodeAt(0);
+  for (const c of t) xor ^= c.charCodeAt(0);
+
+  return String.fromCharCode(xor);
 };
 
