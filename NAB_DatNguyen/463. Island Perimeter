@@ -1,0 +1,44 @@
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var islandPerimeter = function(grid) {
+    const rows = grid.length;
+    const cols = grid[0].length;
+    const visited = new Set();
+
+    function dfs(r, c) {
+        // We found 1 unit of perimeter , If out of bounds or water (base case)
+        if (r < 0 || r >= rows || c < 0 || c >= cols || grid[r][c] === 0) {
+            return 1;
+        }
+
+        // If already visited, don't count again (base case)
+        if (visited.has(`${r}-${c}`)) {
+            return 0;
+        }
+
+        // Mark as visited
+        visited.add(`${r}-${c}`);
+
+        // Explore all 4 directions and sum the results
+        let perimeter = 0;
+        perimeter += dfs(r + 1, c); // go down
+        perimeter += dfs(r - 1, c); // go up
+        perimeter += dfs(r, c + 1); // go right
+        perimeter += dfs(r, c - 1); // go left
+
+        return perimeter;
+    }
+
+    // find first piece of land, then start moving to find the perimeter
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            if (grid[r][c] === 1) {
+                return dfs(r, c);
+            }
+        }
+    }
+
+    return 0;
+};
