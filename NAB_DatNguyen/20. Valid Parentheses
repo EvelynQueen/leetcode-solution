@@ -1,0 +1,32 @@
+// Using Stack + HashMap
+// Use a map to store matching pairs of closing → opening parentheses
+// Iterate through the string s
+// If the character is an opening bracket, push it onto the stack
+// If the character is a closing bracket:
+// check if the top of the stack matches its corresponding opening bracket
+//  if it matches, pop the stack
+//  otherwise, the string is invalid
+// After iteration, the string is valid only if the stack is empty
+
+var isValid = function (s) {
+  let stack = [];
+  let valid = {
+    "}": "{",
+    "]": "[",
+    ")": "(",
+  };
+
+  for (let c of s) {
+    if (c === "{" || c === "(" || c === "[") {
+      stack.push(c);
+    } else {
+      if (valid[c] === stack[stack.length - 1]) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+
+  return stack.length === 0;
+};
