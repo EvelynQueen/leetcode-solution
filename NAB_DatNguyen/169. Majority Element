@@ -1,0 +1,19 @@
+// Using hashmap
+// Assume that majority element always appeared
+// and The majority element is the element that appears more than ⌊n / 2⌋ times.
+// Calculate the  majorityCount = Math.floor(nums.length / 2)
+// Using hashmap to count the frequency of each number
+// If anyumber has freqency = majorityCount
+// Return that number imediately
+
+var majorityElement = function (nums) {
+  let freqMap = {};
+  let majorityCount = Math.floor(nums.length / 2);
+
+  for (let num of nums) {
+    freqMap[num] = (freqMap[num] || 0) + 1;
+    if (freqMap[num] > majorityCount) {
+      return num;
+    }
+  }
+};
