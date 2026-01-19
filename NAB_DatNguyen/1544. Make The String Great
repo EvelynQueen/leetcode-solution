@@ -4,18 +4,16 @@
 var makeGood = function (s) {
   let charStack = [];
 
-  for (let i = 0; i < s.length; i++) {
+  for (let char of s) {
     const top = charStack[charStack.length - 1];
 
-    if (
-      top &&
-      Math.abs(s[i].charCodeAt(0) - top.charCodeAt(0)) === 32
-    ) {
+    if (top && Math.abs(char.charCodeAt(0) - top.charCodeAt(0)) === 32) {
       charStack.pop();
     } else {
-      charStack.push(s[i]);
+      charStack.push(char);
     }
   }
 
   return charStack.join("");
 };
+
