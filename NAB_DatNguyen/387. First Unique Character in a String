@@ -1,0 +1,16 @@
+// Using hash map to count the frequency
+// Because hashmap isn't sorted or saved by index
+// The iteration order of a Map follows the order in which keys are inserted
+// => iterate through the map and the first key with count = 1 is the first unique character 
+var firstUniqChar = function(s) {
+    const count = {};
+    for (const char of s) {
+        count[char] = (count[char] || 0) + 1;
+    }
+
+    for (let i = 0; i < s.length; i++) {
+        if (count[s[i]] === 1) return i;
+    }
+
+    return -1;
+};
