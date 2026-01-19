@@ -101,3 +101,17 @@ var findTheDifference = function(s, t) {
   return String.fromCharCode(xor);
 };
 
+// XOR 1 loop
+var findTheDifference = function (s, t) {
+  let xor = 0;
+
+  for (let i = 0; i < t.length; i++) {
+    xor ^= t.charCodeAt(i);
+    if (i < s.length) {
+      xor ^= s.charCodeAt(i);
+    }
+  }
+
+  return String.fromCharCode(xor);
+};
+
