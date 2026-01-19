@@ -11,10 +11,11 @@ var isPalindrome = function (s) {
 };
 
 //Two pointer methods
-/**
- * @param {string} s
- * @return {boolean}
- */
+//Custome an isAlphaNumeric() function to check if a character is number or letter
+// abba is an Palindrome 
+// => Using 2 pointer moving from head and tail of a string to check if that string is palindrome
+// => If any of pair character is not-matched => return false
+// else return true
 var isPalindrome = function (s) {
   let left = 0;
   let right = s.length - 1;
