@@ -1,3 +1,6 @@
+// Using stack and the difference between numeric ASCII value of lower case and upper case 
+// On ASCII, the subtraction of uppercase letter the corresponding lower case letter is exactly 32
+// Continuosly check the letter with the top element of stack
 var makeGood = function (s) {
   let charStack = [];
 
