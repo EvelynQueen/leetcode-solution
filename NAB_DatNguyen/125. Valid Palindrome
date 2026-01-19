@@ -16,12 +16,16 @@ var isPalindrome = function (s) {
 // => Using 2 pointer moving from head and tail of a string to check if that string is palindrome
 // => If any of pair character is not-matched => return false
 // else return true
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
 var isPalindrome = function (s) {
   let left = 0;
   let right = s.length - 1;
 
   const isAlphaNumeric = (ch) => {
-    return /^[a-z0-9]$/i.test(ch);
+    return /^[a-z0-9A-Z]$/i.test(ch);
   };
 
   while (left < right) {
