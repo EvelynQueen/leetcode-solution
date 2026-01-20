@@ -1,0 +1,43 @@
+// Using a monotonic increasing stack
+// Store indices instead of values to reference and update prices in-place
+// Our goal : find the next  <=  price to the right for each price
+// Maintain a stack of indices whose prices are in increasing order
+// While the current price is smaller than or equal to the price at the stack top:
+//  Pop the index from the stack
+//  Apply the discount using the current price
+// The current price is the nearest smaller price for the popped index
+
+var finalPrices = function (prices) {
+  let increaseStack = [];
+  if (prices.length === 1) {
+    return prices;
+  }
+  for (let i = 0; i <= prices.length - 1; i++) {
+    while (prices[i] <= prices[increaseStack[increaseStack.length - 1]]) {
+      prices[increaseStack[increaseStack.length - 1]] =
+        prices[increaseStack[increaseStack.length - 1]] - prices[i];
+      increaseStack.pop();
+    }
+    increaseStack.push(i);
+  }
+
+  return prices;
+};
+
+
+//Brute Force
+// constraints : 
+//1 <= prices.length <= 500
+//1 <= prices[i] <= 1000
+//I think Brute force approach is okey :>
+var finalPrices = function (prices) {
+  for (let i = 0; i < prices.length - 1; i++) {
+    for (let j = i + 1; j < prices.length; j++) {
+      if (prices[j] <= prices[i]) {
+        prices[i] -= prices[j];
+        break;
+      }
+    }
+  }
+  return prices;
+};
