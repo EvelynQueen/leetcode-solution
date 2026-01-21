@@ -1,0 +1,26 @@
+///Using index queue (keep reference to k)
+// Each time : tickets[headOfQueue]--
+// if tickets[headOfQueue] === 0 && headOfQueue = k => return time
+// Else if if tickets[headOfQueue] === 0 && headOfQueue !== k => headOfQueue out of queue
+// Else headOfQueue != k => push heaadOfQueue to tail of queue
+
+var timeRequiredToBuy = function (tickets, k) {
+  let queue = [];
+  let time = 0;
+
+  for (let i = 0; i < tickets.length; i++) {
+    queue.push(i);
+  }
+
+  while (true) {
+    let idx = queue.shift();
+    tickets[idx]--;
+    time++;
+
+    if (tickets[idx] === 0) {
+      if (idx === k) return time;
+    } else {
+      queue.push(idx);
+    }
+  }
+};
