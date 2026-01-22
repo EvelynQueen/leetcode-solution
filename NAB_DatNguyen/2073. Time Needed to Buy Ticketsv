@@ -24,3 +24,27 @@ var timeRequiredToBuy = function (tickets, k) {
     }
   }
 };
+
+
+//Counting maximum tickets that a people can buy => time
+// Whenever people at k can buy all tickets needed
+// We stop the queue
+// => All people (i) <= k can buy at most tickets[k]
+//  => All people (i) > k can buy at most tickets[k] - 1 
+// So most of the tickets that people in queue can buy = times k needed to buy tickets[k];
+
+var timeRequiredToBuy = function (tickets, k) {
+  let time = 0;
+  let cur = tickets[k];
+
+  for (let i = 0; i < tickets.length; i++) {
+    if (i <= k) {
+      time += Math.min(tickets[i], cur);
+    } else {
+      time += Math.min(tickets[i], cur - 1);
+    }
+  }
+
+  return time;
+};
+
