@@ -1,0 +1,37 @@
+/**
+ * @param {number[]} students
+ * @param {number[]} sandwiches
+ * @return {number}
+ */
+var countStudents = function (students, sandwiches) {
+  let circleStudentCount = 0;
+  let squareStudentCount = 0;
+  for (let s of students) {
+    if (s == 0) {
+      circleStudentCount++;
+    } else {
+      squareStudentCount++;
+    }
+  }
+
+  for (let s of sandwiches) {
+    //No more student want 0 sandwich => remain = student want square sandwich
+    if (s == 0 && circleStudentCount == 0) {
+      return squareStudentCount;
+    }
+
+    //No more student want 1 sandwich => remain = student want circle sandwich
+    if (s == 1 && squareStudentCount == 0) {
+      return circleStudentCount;
+    }
+
+    //iterate through sandwichs[] to find what student want either 0 or 1 sandwich
+    if (s == 0) {
+      circleStudentCount--;
+    } else {
+      squareStudentCount--;
+    }
+  }
+
+  return 0;
+};
