@@ -1,0 +1,29 @@
+// Two pointer
+// Pointer1 points to element in nums1
+// Pointer2 points to element in nums2
+// nums1 and nums2 are sorted in non-decreasing order
+// => If the current element in nums1 is smaller than the one in nums2
+// move pointer1 1 step forward
+// otherwise, moving pointer2
+// Continue until the first common element founded
+// Since nums1 and nums2 may have different lengths
+// Continue while both pointers are valid to avoid out-of-bounds access
+
+var getCommon = function (nums1, nums2) {
+    let pointer1 = 0;
+    let pointer2 = 0;
+    let length = Math.min(nums1.length, nums2.length);
+
+    while (pointer1 < nums1.length && pointer2 < nums2.length) {
+        if (nums1[pointer1] == nums2[pointer2]) {
+            return nums1[pointer1];
+        }
+        if (nums1[pointer1] < nums2[pointer2]) {
+            pointer1++;
+        } else {
+            pointer2++;
+        }
+    }
+
+    return -1;
+};
