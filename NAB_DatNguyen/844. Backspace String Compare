@@ -1,0 +1,25 @@
+//Using stack
+//Continuosly push() into stack
+//Meet "#" => pop() 
+// join() 2 stack then compare
+var backspaceCompare = function (s, t) {
+  let stackS = [];
+  let stackT = [];
+
+  for (let i = 0; i <= s.length - 1; i++) {
+    if (s[i] == "#") {
+      stackS.pop();
+    } else {
+      stackS.push(s[i]);
+    }
+  }
+  for (let i = 0; i <= t.length - 1; i++) {
+    if (t[i] == "#") {
+      stackT.pop();
+    } else {
+      stackT.push(t[i]);
+    }
+  }
+
+  return stackS.join("") == stackT.join("");
+};
