@@ -1,0 +1,28 @@
+// Using two pointers
+// Given a non-decreasing sorted array
+// One pointer starts at the left, one at the right
+// Compare absolute values at both ends
+// The larger absolute value produces the larger square
+// Place that square at the END of the result array
+// Move the pointer that was used
+// Decrease the result index
+
+var sortedSquares = function (nums) {
+  let left = 0;
+  let right = nums.length - 1;
+  let pos = nums.length - 1;
+  let result = Array(nums.length).fill(0);
+  while (left <= right) {
+    if (Math.abs(nums[left]) < Math.abs(nums[right])) {
+      result[pos] = nums[right] ** 2;
+      right--;
+      pos--;
+    } else {
+      result[pos] = nums[left] ** 2;
+      left++;
+      pos--;
+    }
+  }
+
+  return result;
+};
