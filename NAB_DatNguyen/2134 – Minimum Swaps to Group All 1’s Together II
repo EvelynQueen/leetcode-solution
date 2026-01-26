@@ -1,0 +1,21 @@
+var minSwaps = function (nums) {
+  let k = nums.reduce((a, b) => a + b, 0);
+  if (k <= 1) return 0;
+
+  let arr = nums.concat(nums);
+
+  let onesInWindow = 0;
+  for (let i = 0; i < k; i++) {
+    onesInWindow += arr[i];
+  }
+
+  let maxOnes = onesInWindow;
+
+  for (let i = k; i < arr.length; i++) {
+    onesInWindow += arr[i];
+    onesInWindow -= arr[i - k];
+    maxOnes = Math.max(maxOnes, onesInWindow);
+  }
+
+  return k - maxOnes;
+};

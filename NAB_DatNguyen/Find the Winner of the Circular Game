@@ -1,0 +1,8 @@
+var findTheWinner = function (n, k) {
+  let q = Array.from({ length: n }, (_, i) => i + 1);
+  while (q.length > 1) {
+    for (let i = 1; i < k; i++) q.push(q.shift());
+    q.shift();
+  }
+  return q[0];
+};

@@ -1,0 +1,26 @@
+var minSwaps = function (data) {
+  let k = 0;
+  for (let x of data) {
+    if (x === 1) k++;
+  }
+
+  if (k <= 1) return 0;
+
+  let onesInWindow = 0;
+
+  // cửa sổ đầu tiên
+  for (let i = 0; i < k; i++) {
+    onesInWindow += data[i];
+  }
+
+  let maxOnes = onesInWindow;
+
+  // trượt cửa sổ
+  for (let i = k; i < data.length; i++) {
+    onesInWindow += data[i];
+    onesInWindow -= data[i - k];
+    maxOnes = Math.max(maxOnes, onesInWindow);
+  }
+
+  return k - maxOnes;
+};
